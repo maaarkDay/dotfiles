@@ -152,7 +152,6 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 " Everything above this line is for COC, scroll to top of file to see notes
 
-
 set scrolloff=20
 set number
 set relativenumber
@@ -164,29 +163,32 @@ set foldmethod=indent
 set splitright "Opens new vertical split files to the left
 set mouse=a "Allows mouse to be used in Vim
 set incsearch "When you search (for example, using /), the matches will be shown while you type.
+set termguicolors "Adds deep colors not available on mac terminal. 
 autocmd VimResized * wincmd = "Auto resizes splits when resizing Vim window
-
 "Plug-ins**************************************************************
 call plug#begin('~/.vim/plugged')
-  " File explorer
+  "File explorer
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
-  " Theme
   Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
-  Plug 'dracula/vim', { 'as': 'dracula' }
+  "Theme
+  Plug 'ayu-theme/ayu-vim'
   " Syntax
   Plug 'pangloss/vim-javascript'
-  " Autocomplete
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  "Autocomplete
+  "Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end() 
 "Plug-ins**************************************************************
 
-let g:dracula_colorterm = 0
-let g:dracula_italic = 0
-colorscheme dracula
+let ayucolor="dark"
+colorscheme ayu
 
 let g:javascript_plugin_jsdoc = 1
+let &t_SI = "\<Esc>[3 q" "Changes cursor to blinking line during insert mode.
+let &t_EI = "\<Esc>[2 q" "Changes cursor to solid block during normal mode.
 
 let mapleader = " "
 nnoremap <leader>f :Files<CR>
+nnoremap <leader>w <C-w>
+inoremap ii <Esc>
 inoremap {} {}<Esc>ha<CR><CR><Esc>ki<tab>

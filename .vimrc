@@ -190,5 +190,10 @@ let &t_EI = "\<Esc>[2 q" "Changes cursor to solid block during normal mode.
 let mapleader = " "
 nnoremap <leader>f :Files<CR>
 nnoremap <leader>w <C-w>
+nnoremap <leader>= <C-w>20>
+nnoremap <leader>- <C-w>20<
+nnoremap <leader>t :tabnew<CR>:Ex<CR>
+nnoremap <leader>v :vs<CR>:Ex<CR>
 inoremap ii <Esc>
 inoremap {} {}<Esc>ha<CR><CR><Esc>ki<tab>
+inoremap conl console.log();<Esc>hha"

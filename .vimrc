@@ -163,6 +163,7 @@ set foldmethod=indent
 set splitright "Opens new vertical split files to the left
 set mouse=a "Allows mouse to be used in Vim
 set incsearch "When you search (for example, using /), the matches will be shown while you type.
+set showtabline=2 "Always show the tab line, even if there is only one tab.
 set termguicolors "Adds deep colors not available on mac terminal. 
 autocmd VimResized * wincmd = "Auto resizes splits when resizing Vim window
 "Plug-ins**************************************************************

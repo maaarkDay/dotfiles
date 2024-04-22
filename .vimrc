@@ -190,6 +190,7 @@ colorscheme ayu
 highlight LineNr guifg=#606060
 highlight jsDocParam guifg=#9F4A20
 highlight jsDocTypeBrackets guifg=#226688
+highlight jsDocTypeNoParam guifg=#226688
 highlight jsDocType guifg=#226688
 highlight jsDocTags guifg=#907248
 

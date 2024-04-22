@@ -160,11 +160,13 @@ set shiftwidth=2
 set expandtab
 set smartindent
 set foldmethod=indent
+set foldenable
 set splitright "Opens new vertical split files to the left
 set mouse=a "Allows mouse to be used in Vim
 set incsearch "When you search (for example, using /), the matches will be shown while you type.
-set showtabline=2 "Always show the tab line, even if there is only one tab.
-set termguicolors "Adds deep colors not available on mac terminal. 
+set termguicolors "Adds deep colors not available on mac terminal.
+set guifont=Monospace\ Krypton\ 12
+
 autocmd VimResized * wincmd = "Auto resizes splits when resizing Vim window
 "Plug-ins**************************************************************
 call plug#begin('~/.vim/plugged')
@@ -178,11 +180,18 @@ call plug#begin('~/.vim/plugged')
   Plug 'pangloss/vim-javascript'
   "Autocomplete
   "Plug 'neoclide/coc.nvim', {'branch': 'release'}
-call plug#end() 
+call plug#end()
 "Plug-ins**************************************************************
 
 let ayucolor="dark"
 colorscheme ayu
+
+"Override colorscheme colors for certain elements
+highlight LineNr guifg=#606060
+highlight jsDocParam guifg=#9F4A20
+highlight jsDocTypeBrackets guifg=#226688
+highlight jsDocType guifg=#226688
+highlight jsDocTags guifg=#907248
 
 let g:javascript_plugin_jsdoc = 1
 let &t_SI = "\<Esc>[3 q" "Changes cursor to blinking line during insert mode.
@@ -191,10 +200,16 @@ let &t_EI = "\<Esc>[2 q" "Changes cursor to solid block during normal mode.
 let mapleader = " "
 nnoremap <leader>f :Files<CR>
 nnoremap <leader>w <C-w>
+nnoremap <leader>q :q<CR>
 nnoremap <leader>= <C-w>20>
 nnoremap <leader>- <C-w>20<
 nnoremap <leader>t :tabnew<CR>:Ex<CR>
-nnoremap <leader>v :vs<CR>:Ex<CR>
+nnoremap <leader>v :vs<CR>
+nnoremap <leader>vv <C-v>
 inoremap ii <Esc>
 inoremap {} {}<Esc>ha<CR><CR><Esc>ki<tab>
-inoremap conl console.log();<Esc>hha"
+inoremap log console.log()<Esc>ha
+inoremap async async () {}<Esc>ha<CR><CR><Esc>kklllllli
+
+"When in visual block mode, used to comment out all selected lines.
+xnoremap <silent> / I//<Esc>

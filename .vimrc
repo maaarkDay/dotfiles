@@ -207,6 +207,7 @@ nnoremap <leader>- <C-w>20<
 nnoremap <leader>t :tabnew<CR>:Ex<CR>
 nnoremap <leader>v :vs<CR>
 nnoremap <leader>vv <C-v>
+nnoremap <leader>r :Run<CR>
 inoremap ii <Esc>
 inoremap {} {}<Esc>ha<CR><CR><Esc>ki<tab>
 inoremap log console.log()<Esc>ha
@@ -214,3 +215,33 @@ inoremap async async () {}<Esc>ha<CR><CR><Esc>kklllllli
 
 "When in visual block mode, used to comment out all selected lines.
 xnoremap <silent> / I//<Esc>
+
+function! RunScriptWithArgs()
+    " Ensure the buffer has a filename and is saved
+    if expand('%') == ''
+        echo "Buffer has no file name. Please save the file first."
+        return
+    endif
+
+    " Check if the file needs to be saved
+    if &modified
+        if confirm("File has unsaved changes. Save now?", "&Yes\n&No", 1) == 1
+            write
+        else
+            return
+        endif
+    endif
+
+    " Prompt for arguments
+    let l:args = input('Enter arguments: ')
+
+    " Prepare the command
+    let l:cmd = 'bash ' . shellescape(expand('%:p')) . ' ' . l:args
+
+    " Execute the script in a new window
+    belowright new
+    setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap
+    execute '.!' . l:cmd
+endfunction
+
+command! Run call RunScriptWithArgs()

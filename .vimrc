@@ -179,7 +179,7 @@ call plug#begin('~/.vim/plugged')
   " Syntax
   Plug 'pangloss/vim-javascript'
   "Autocomplete
-  "Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 "Plug-ins**************************************************************
 
@@ -193,6 +193,7 @@ highlight jsDocTypeBrackets guifg=#226688
 highlight jsDocTypeNoParam guifg=#226688
 highlight jsDocType guifg=#226688
 highlight jsDocTags guifg=#907248
+highlight NetrwDir guifg=#5c6773
 
 let g:javascript_plugin_jsdoc = 1
 let &t_SI = "\<Esc>[3 q" "Changes cursor to blinking line during insert mode.
@@ -207,14 +208,19 @@ nnoremap <leader>- <C-w>20<
 nnoremap <leader>t :tabnew<CR>:Ex<CR>
 nnoremap <leader>v :vs<CR>
 nnoremap <leader>vv <C-v>
+"Move half a page up and keep cursor centered
+nnoremap <leader>j <C-d> M
+"Move half a page down and keep cursor centered
+nnoremap <leader>k <C-u> M
 nnoremap <leader>r :Run<CR>
 inoremap ii <Esc>
 inoremap {} {}<Esc>ha<CR><CR><Esc>ki<tab>
 inoremap log console.log()<Esc>ha
 inoremap async async () {}<Esc>ha<CR><CR><Esc>kklllllli
-
 "When in visual block mode, used to comment out all selected lines.
 xnoremap <silent> / I//<Esc>
+" Make shift G go to bottom and end of line
+xnoremap G G$
 
 function! RunScriptWithArgs()
     " Ensure the buffer has a filename and is saved
@@ -222,7 +228,6 @@ function! RunScriptWithArgs()
         echo "Buffer has no file name. Please save the file first."
         return
     endif
-
     " Check if the file needs to be saved
     if &modified
         if confirm("File has unsaved changes. Save now?", "&Yes\n&No", 1) == 1
@@ -231,16 +236,13 @@ function! RunScriptWithArgs()
             return
         endif
     endif
-
     " Prompt for arguments
     let l:args = input('Enter arguments: ')
-
     " Prepare the command
     let l:cmd = 'bash ' . shellescape(expand('%:p')) . ' ' . l:args
-
     " Execute the script in a new window
     belowright new
-    setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap
+    setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile filetype=log
     execute '.!' . l:cmd
 endfunction
 

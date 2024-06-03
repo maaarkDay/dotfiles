@@ -1,3 +1,6 @@
+# auto-suggestions
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+
 # GIT shortcuts
 alias gb='git branch'
 alias gs='git status'

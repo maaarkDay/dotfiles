@@ -56,7 +56,7 @@ function! ShowDocumentation()
 endfunction
 
 " Highlight the symbol and its references when holding the cursor
-autocmd CursorHold * silent call CocActionAsync('highlight')
+" autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Symbol renaming
 nmap <leader>rn <Plug>(coc-rename)
@@ -212,11 +212,16 @@ nnoremap <leader>vv <C-v>
 nnoremap <leader>j <C-d> M
 "Move half a page down and keep cursor centered
 nnoremap <leader>k <C-u> M
+nnoremap <leader>s :%s/
 nnoremap <leader>r :Run<CR>
 inoremap ii <Esc>
+inoremap `` ``<Esc>i
+inoremap "" ""<Esc>i
+inoremap '' ''<Esc>i
 inoremap {} {}<Esc>ha<CR><CR><Esc>ki<tab>
 inoremap log console.log()<Esc>ha
 inoremap async async () {}<Esc>ha<CR><CR><Esc>kklllllli
+inoremap tryc try {} catch (e) {<CR><CR>}<ESC>kkf{a<CR><CR><ESC>k0i<TAB><TAB><TAB>
 "When in visual block mode, used to comment out all selected lines.
 xnoremap <silent> / I//<Esc>
 " Make shift G go to bottom and end of line

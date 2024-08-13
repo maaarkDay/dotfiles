@@ -5,7 +5,7 @@ set nowritebackup
 set updatetime=300
 set signcolumn=yes
 
-" Use tab for trigger completion with characters ahead and navigate
+" Use tab for trigger completion with characters ahead and navigate 
 " NOTE: There's always complete item selected by default, you may want to enable
 " no select by `"suggest.noselect": true` in your configuration file
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
@@ -215,13 +215,17 @@ nnoremap <leader>k <C-u> M
 nnoremap <leader>s :%s/
 nnoremap <leader>r :Run<CR>
 inoremap ii <Esc>
-inoremap `` ``<Esc>i
-inoremap "" ""<Esc>i
-inoremap '' ''<Esc>i
-inoremap {} {}<Esc>ha<CR><CR><Esc>ki<tab>
+inoremap ` ``<Esc>i
+inoremap " ""<Esc>i
+inoremap ' ''<Esc>i
+inoremap ( ()<Esc>i
+inoremap [ []<Esc>i
+inoremap { {}<Esc>i
 inoremap log console.log()<Esc>ha
-inoremap async async () {}<Esc>ha<CR><CR><Esc>kklllllli
+inoremap async async ()<Esc>ha
 inoremap tryc try {} catch (e) {<CR><CR>}<ESC>kkf{a<CR><CR><ESC>k0i<TAB><TAB><TAB>
+" make yank automatically copy to clipboard to os clipboard
+vnoremap <leader>y "+y
 "When in visual block mode, used to comment out all selected lines.
 xnoremap <silent> / I//<Esc>
 " Make shift G go to bottom and end of line

@@ -198,7 +198,6 @@ highlight NetrwDir guifg=#5c6773
 let g:javascript_plugin_jsdoc = 1
 let &t_SI = "\<Esc>[3 q" "Changes cursor to blinking line during insert mode.
 let &t_EI = "\<Esc>[2 q" "Changes cursor to solid block during normal mode.
-
 let mapleader = " "
 nnoremap <leader>f :Files<CR>
 nnoremap <leader>w <C-w>
@@ -208,13 +207,20 @@ nnoremap <leader>- <C-w>20<
 nnoremap <leader>t :tabnew<CR>:Ex<CR>
 nnoremap <leader>v :vs<CR>
 nnoremap <leader>vv <C-v>
+"Comment out an entire line
+nnoremap // 0i//<ESC>
 "Move half a page up and keep cursor centered
 nnoremap <leader>j <C-d> M
 "Move half a page down and keep cursor centered
 nnoremap <leader>k <C-u> M
 nnoremap <leader>s :%s/
 nnoremap <leader>r :Run<CR>
+" Goto tab prev and next
+nnoremap gl gt
+nnoremap gh gT
+" Return to normal mode
 inoremap ii <Esc>
+"
 inoremap ` ``<Esc>i
 inoremap " ""<Esc>i
 inoremap ' ''<Esc>i
@@ -226,8 +232,8 @@ inoremap async async ()<Esc>ha
 inoremap tryc try {} catch (e) {<CR><CR>}<ESC>kkf{a<CR><CR><ESC>k0i<TAB><TAB><TAB>
 " make yank automatically copy to clipboard to os clipboard
 vnoremap <leader>y "+y
-"When in visual block mode, used to comment out all selected lines.
-xnoremap <silent> / I//<Esc>
+"When in visual mode, goto block mode and comment out all lines
+vnoremap <silent> / <C-v>^I//<Esc>
 " Make shift G go to bottom and end of line
 xnoremap G G$
 

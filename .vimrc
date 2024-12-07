@@ -237,6 +237,7 @@ vnoremap <silent> / <C-v>^I//<Esc>
 " Make shift G go to bottom and end of line
 xnoremap G G$
 
+command! Run call RunScriptWithArgs()
 function! RunScriptWithArgs()
     " Ensure the buffer has a filename and is saved
     if expand('%') == ''
@@ -261,4 +262,32 @@ function! RunScriptWithArgs()
     execute '.!' . l:cmd
 endfunction
 
-command! Run call RunScriptWithArgs()
+" Complete HTML tags
+" Insert mode mapping: Trigger tag auto-completion after typing '>'.
+inoremap > <C-R>=CompleteTag()<CR>
+
+" Function to complete the tag with </tag> and place the cursor between ><.
+function! CompleteTag()
+  " Get the current line content up to the cursor position.
+  let line = getline('.')[:col('.')-2]
+  
+  " Find the last opening tag.
+  let tag = matchstr(line, '<\zs\w\+\ze[^<>]*$')
+  
+  " If no valid tag is found, just insert '>'.
+  if empty(tag)
+    return '>'
+  endif
+
+  " Check if it's a self-closing tag
+  let self_closing_tags = ['area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'param', 'source', 'track', 'wbr']
+  if index(self_closing_tags, tag) >= 0
+    return '>'
+  endif
+
+  " Calculate the number of characters to move back
+  let move_back = len(tag) + 3  " +3 for '</' and '>'
+
+  " Return the completed closing tag with cursor between ><
+  return '></' . tag . '>' . repeat("\<Left>", move_back)
+endfunction

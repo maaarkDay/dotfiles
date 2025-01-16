@@ -1,0 +1,8 @@
+keybind = cmd+z>h=goto_split:left
+keybind = cmd+z>l=goto_split:right
+keybind = cmd+z>k=goto_split:top
+keybind = cmd+z>j=goto_split:bottom
+
+keybind = cmd+z>t=next_tab
+
+theme = tokyonight_moon
